@@ -35,7 +35,7 @@ export const CAR_CATALOG = [
     name: 'Premium SUV',
     type: 'Luxury SUV',
     category: 'suv',
-    modelUrl: '/models/suv_car.glb',
+    modelUrl: '/models/suv.glb',
     description: 'Commanding presence, premium interior, and go-anywhere capability.',
     specs: { seats: 5, origin: 'UK', class: 'Luxury SUV' },
     image: 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=600&q=80&auto=format&fit=crop',
