@@ -1,0 +1,514 @@
+/* Simplistic Landing Page */
+.landing-root {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: #ffffff;
+  font-family: var(--font-body);
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-content {
+  text-align: center;
+  z-index: 2;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landing-title {
+  font-family: var(--font-display);
+  font-size: 6rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.landing-subtitle {
+  font-size: 1.5rem;
+  color: #a1a1aa;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* Centered Services CTA */
+.services-center-btn {
+  background: var(--bg-card, #13131f);
+  color: #fff;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  box-shadow: 0 0 30px var(--accent-glow, rgba(79, 70, 229, 0.4));
+  transition: background 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  margin-top: 2rem;
+}
+
+.services-center-btn:hover {
+  background: var(--accent-primary, #374151);
+  box-shadow: 0 0 50px rgba(55, 65, 81, 0.4);
+  border-color: var(--accent-primary, #374151);
+}
+
+/* Drawer Overlay */
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 5, 5, 0.98);
+  backdrop-filter: blur(20px);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  padding: 4rem 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+}
+
+.drawer-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.drawer-title {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.drawer-close {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 3rem;
+  cursor: pointer;
+  padding: 1rem;
+  line-height: 1;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.drawer-close:hover {
+  transform: rotate(90deg);
+  color: var(--accent-primary);
+}
+
+/* Services Grid */
+.drawer-services {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  .drawer-services {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+.service-card {
+  position: relative;
+  border-radius: 20px;
+  text-align: left;
+  cursor: pointer;
+  opacity: 0;
+  /* for animation */
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 350px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-card:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.service-card-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.service-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(1.05);
+}
+
+.service-card:hover .service-card-img {
+  transform: scale(1.15);
+}
+
+.service-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(5, 5, 5, 0.9) 0%, rgba(5, 5, 5, 0.4) 50%, rgba(5, 5, 5, 0.1) 100%);
+  transition: background 0.4s ease;
+}
+
+.service-card:hover .service-card-overlay {
+  background: linear-gradient(to top, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.2) 50%, rgba(5, 5, 5, 0.1) 100%);
+}
+
+.service-card-content {
+  position: relative;
+  z-index: 2;
+  padding: 2.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.service-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  transform: translateY(10px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-desc {
+  font-size: 1.1rem;
+  color: #a1a1aa;
+  line-height: 1.5;
+  transform: translateY(10px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease;
+}
+
+.service-card-arrow {
+  position: absolute;
+  top: 2.5rem;
+  right: 2.5rem;
+  opacity: 0;
+  transform: translate(-10px, 10px);
+  color: var(--accent-primary);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-card:hover .service-title {
+  transform: translateY(0);
+}
+
+.service-card:hover .service-desc {
+  transform: translateY(0);
+  color: #ffffff;
+}
+
+.service-card:hover .service-card-arrow {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Awwwards Style Staggered Animations */
+.drawer-overlay.is-open .slide-left {
+  animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.drawer-overlay.is-open .slide-right {
+  animation: slideInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-150px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(150px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ── Mobile Responsiveness ── */
+@media (max-width: 768px) {
+  .landing-title {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .landing-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .services-center-btn {
+    width: 110px;
+    height: 110px;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+  }
+
+  .drawer-overlay {
+    padding: 2rem 1.5rem;
+  }
+
+  .drawer-header {
+    margin-bottom: 3rem;
+  }
+
+  .drawer-title {
+    font-size: 2rem;
+  }
+
+  .drawer-close {
+    font-size: 2.5rem;
+    padding: 0.5rem;
+  }
+
+  .service-card {
+    height: 280px;
+  }
+
+  .service-card-content {
+    padding: 1.5rem;
+  }
+
+  /* Make text always visible and animated fully on mobile to avoid bad hover states */
+  .service-title {
+    font-size: 1.6rem;
+    transform: translateY(0);
+  }
+
+  .service-desc {
+    font-size: 1rem;
+    transform: translateY(0);
+    color: #ffffff;
+  }
+
+  .service-card-arrow {
+    top: 1.5rem;
+    right: 1.5rem;
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+/* ── Bottom HUD Bar ─────────────────────────────── */
+.lp-bottom-hud {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 2.5rem 2.5rem;
+  pointer-events: none;
+}
+
+/* ── Self Service Center ── */
+.lp-ssc {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  pointer-events: auto;
+}
+
+.lp-ssc-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #9ca3af;
+  box-shadow: 0 0 0 0 rgba(156, 163, 175, 0.4);
+  animation: lp-ssc-pulse 2.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes lp-ssc-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(156, 163, 175, 0.5); }
+  60%  { box-shadow: 0 0 0 7px rgba(156, 163, 175, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(156, 163, 175, 0); }
+}
+
+.lp-ssc-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+.lp-ssc-eyebrow {
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.25);
+  line-height: 1;
+}
+
+.lp-ssc-text {
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.2;
+}
+
+/* ── Live Clock ── */
+.lp-clock {
+  pointer-events: auto;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+}
+
+.lp-clock-time {
+  display: flex;
+  align-items: baseline;
+  line-height: 1;
+}
+
+.lp-clock-hm {
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: 2.6rem;
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  color: #ffffff;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.lp-clock-sep {
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: 2rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.2);
+  animation: lp-blink 1s step-end infinite;
+  margin: 0 0.04em;
+  letter-spacing: 0;
+}
+
+@keyframes lp-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.lp-clock-sec {
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.3);
+  font-variant-numeric: tabular-nums;
+  align-self: flex-end;
+  margin-bottom: 0.3em;
+  letter-spacing: 0;
+}
+
+.lp-clock-ampm {
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: rgba(156, 163, 175, 0.85);
+  text-transform: uppercase;
+  align-self: flex-end;
+  margin-bottom: 0.4em;
+  margin-left: 0.5em;
+}
+
+.lp-clock-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.lp-clock-label {
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.2);
+  text-transform: uppercase;
+}
+
+.lp-clock-line {
+  width: 28px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+@media (max-width: 768px) {
+  .lp-bottom-hud {
+    padding: 0 1.5rem 1.75rem;
+  }
+
+  .lp-clock-hm {
+    font-size: 1.8rem;
+  }
+
+  .lp-clock-sep {
+    font-size: 1.4rem;
+  }
+
+  .lp-clock-sec {
+    font-size: 0.7rem;
+  }
+
+  .lp-ssc-text {
+    font-size: 0.7rem;
+  }
+}
