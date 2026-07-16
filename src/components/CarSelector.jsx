@@ -4,7 +4,7 @@ import { Car, Zap } from 'lucide-react'
 export const CAR_CATALOG = [
   {
     id: 'supercar',
-    name: 'Supercar',
+    name: 'Ferrari',
     type: 'Exotic Performance',
     category: 'sports',
     modelUrl: '/models/ferrari.glb',

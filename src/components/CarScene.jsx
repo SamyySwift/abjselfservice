@@ -1,7 +1,7 @@
 import { Suspense, useRef, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Environment, ContactShadows, PerspectiveCamera, Html } from '@react-three/drei'
-import { MousePointer2, ZoomIn, RotateCcw } from 'lucide-react'
+import { MousePointer2 } from 'lucide-react'
 import CarModel from './CarModel.jsx'
 
 function LoadingScreen() {
@@ -22,6 +22,26 @@ export default function CarScene({ modelUrl, carColor, finish, ppfEnabled, onLoa
   return (
     <div style={{ width: '100%', height: '100%', position: 'relative' }}>
       {/* Hint overlay */}
+      {/* Logo — top left */}
+      <img
+        src="/logo.jpeg"
+        alt="Rolling Automobiles"
+        style={{
+          position: 'absolute',
+          top: '20px',
+          left: '20px',
+          zIndex: 10,
+          height: '48px',
+          width: '48px',
+          borderRadius: '50%',
+          objectFit: 'cover',
+          boxShadow: '0 0 16px rgba(255,255,255,0.1)',
+          border: '1px solid rgba(255,255,255,0.12)',
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Drag hint — centered */}
       <div className="canvas-overlay-top">
         <div className="view-hint">
           <MousePointer2 size={13} strokeWidth={2} />
@@ -88,12 +108,6 @@ export default function CarScene({ modelUrl, carColor, finish, ppfEnabled, onLoa
           target={[0, 1.6, 0]}
         />
       </Canvas>
-
-      {/* Bottom badge */}
-      <div className="canvas-info-badge">
-        <RotateCcw size={13} strokeWidth={2} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 4 }} />
-        Interactive 3D Preview — Real-time Color & PPF Visualization
-      </div>
     </div>
   )
 }
