@@ -21,7 +21,7 @@ const SERVICES = [
   { id: 'inventory', label: 'Our Inventory', desc: 'Browse our full premium catalogue.', image: IMAGES[4] },
   { id: 'maintenance', label: 'Maintenance', desc: 'Schedule servicing & diagnostics.', image: IMAGES[0] },
   { id: 'data', label: 'Data & Records', desc: 'Manage your vehicle records securely.', image: IMAGES[1] },
-  { id: 'scan', label: 'Our Platforms', desc: 'Scan to follow our channels.', image: IMAGES[2] },
+  { id: 'scan', label: 'Our Platforms', desc: 'Scan to follow our channels.', ctaAction: 'platforms', image: IMAGES[2] },
   { id: 'booking', label: 'Book Appointment', desc: 'Reserve your slot instantly.', image: IMAGES[3] },
   { id: 'qr', label: 'Save Car via QR', desc: 'Save your favourite cars to your phone.', image: IMAGES[4] },
   { id: 'analytics', label: 'Analytics', desc: 'Track the most viewed models & trends.', image: IMAGES[5] },
@@ -271,7 +271,7 @@ export default function LandingPage({ onNavigate }) {
             onCanPlay={() => setVideoLoaded(true)}
             poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E"
           >
-            <source src="/bg.mp4" type="video/mp4" />
+            <source src="/bg_video.MP4" type="video/mp4" />
           </video>
           {/* Layered overlays */}
           <div className="absolute inset-0 bg-black/60" />

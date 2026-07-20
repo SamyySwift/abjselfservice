@@ -7,6 +7,8 @@ import FinishSelector from './components/FinishSelector.jsx'
 import PPFToggle from './components/PPFToggle.jsx'
 import BookingCTA from './components/BookingCTA.jsx'
 import LandingPage from './components/LandingPage.jsx'
+import PlatformsOverlay from './components/PlatformsOverlay.jsx'
+import { AnimatePresence } from 'framer-motion'
 
 const DEFAULT_COLOR = { hex: '#000000', name: 'Obsidian Black' }
 const DEFAULT_FINISH = 'gloss'
@@ -19,10 +21,12 @@ export default function App() {
   const [finish, setFinish] = useState(DEFAULT_FINISH)
   const [ppfEnabled, setPpfEnabled] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [showPlatforms, setShowPlatforms] = useState(false)
 
   const handleNavigate = useCallback((dest) => {
     if (dest === 'configurator') setView('selector')
     else if (dest === 'landing') { setView('landing'); setSelectedCar(null) }
+    else if (dest === 'platforms') setShowPlatforms(true)
   }, [])
 
   const handleCarSelect = useCallback((car) => {
@@ -44,20 +48,17 @@ export default function App() {
   const handleFinishChange = useCallback((f) => { setFinish(f) }, [])
   const handlePPFToggle = useCallback((val) => { setPpfEnabled(val) }, [])
 
-  // ── Landing Screen ───────────────────────────────────────
+  // ── Main Content Switch ──────────────────────────────────
+  let content = null;
+
   if (view === 'landing') {
-    return <LandingPage onNavigate={handleNavigate} />
-  }
-
-  // ── Car Selection Screen ─────────────────────────────────
-  if (view === 'selector') {
-    return <CarSelector onSelect={handleCarSelect} onBack={() => setView('landing')} />
-  }
-
-  // ── Configurator Screen ──────────────────────────────────
-  return (
-    <div className="app-layout">
-      <section className="configurator-section">
+    content = <LandingPage onNavigate={handleNavigate} />
+  } else if (view === 'selector') {
+    content = <CarSelector onSelect={handleCarSelect} onBack={() => setView('landing')} />
+  } else {
+    content = (
+      <div className="app-layout">
+        <section className="configurator-section">
         {/* 3D Canvas */}
         <div className="canvas-wrapper">
           <CarScene
@@ -123,5 +124,17 @@ export default function App() {
         </aside>
       </section>
     </div>
+    )
+  }
+
+  return (
+    <>
+      {content}
+      <AnimatePresence>
+        {showPlatforms && (
+          <PlatformsOverlay onClose={() => setShowPlatforms(false)} />
+        )}
+      </AnimatePresence>
+    </>
   )
 }
