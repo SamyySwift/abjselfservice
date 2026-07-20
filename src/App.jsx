@@ -8,6 +8,7 @@ import PPFToggle from './components/PPFToggle.jsx'
 import BookingCTA from './components/BookingCTA.jsx'
 import LandingPage from './components/LandingPage.jsx'
 import PlatformsOverlay from './components/PlatformsOverlay.jsx'
+import StaffConnectOverlay from './components/StaffConnectOverlay.jsx'
 import { AnimatePresence } from 'framer-motion'
 
 const DEFAULT_COLOR = { hex: '#000000', name: 'Obsidian Black' }
@@ -22,11 +23,13 @@ export default function App() {
   const [ppfEnabled, setPpfEnabled] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
   const [showPlatforms, setShowPlatforms] = useState(false)
+  const [showStaff, setShowStaff] = useState(false)
 
   const handleNavigate = useCallback((dest) => {
     if (dest === 'configurator') setView('selector')
     else if (dest === 'landing') { setView('landing'); setSelectedCar(null) }
     else if (dest === 'platforms') setShowPlatforms(true)
+    else if (dest === 'staff') setShowStaff(true)
   }, [])
 
   const handleCarSelect = useCallback((car) => {
@@ -133,6 +136,9 @@ export default function App() {
       <AnimatePresence>
         {showPlatforms && (
           <PlatformsOverlay onClose={() => setShowPlatforms(false)} />
+        )}
+        {showStaff && (
+          <StaffConnectOverlay onClose={() => setShowStaff(false)} />
         )}
       </AnimatePresence>
     </>
