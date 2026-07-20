@@ -13,21 +13,21 @@ const IMAGES = [
 
 /* ─── Service Data ─── */
 const SERVICES = [
-  { id: 'enquiry', label: 'Enquiry', desc: 'Ask our team anything — instant response.', image: IMAGES[0] },
+  { id: 'enquiry', label: 'Enquiry', desc: 'Ask our team anything — instant response.', image: '/enquiry.png' },
   { id: 'ppf', label: 'PPF & Custom', desc: 'Real-time 3D paint protection & colour.', ctaAction: 'configurator', image: IMAGES[5] },
   { id: 'gis', label: 'GIS Display', desc: 'Geo-mapped inventory across the city.', image: IMAGES[1] },
   { id: 'talk', label: 'Talk to Staff', desc: 'Direct line to our team or CEO.', ctaAction: 'staff', image: '/staff_connect.png' },
   { id: 'showroom', label: 'View Showroom', desc: 'Immersive virtual showroom tour.', image: IMAGES[3] },
   { id: 'inventory', label: 'Our Inventory', desc: 'Browse our full premium catalogue.', image: IMAGES[4] },
-  { id: 'maintenance', label: 'Maintenance', desc: 'Schedule servicing & diagnostics.', image: IMAGES[0] },
-  { id: 'data', label: 'Data & Records', desc: 'Manage your vehicle records securely.', image: IMAGES[1] },
+  { id: 'maintenance', label: 'Maintenance', desc: 'Schedule servicing & diagnostics.', image: '/maintenance.png' },
+  { id: 'data', label: 'Data & Records', desc: 'Manage your vehicle records securely.', image: '/data_records.png' },
   { id: 'scan', label: 'Our Platforms', desc: 'Scan to follow our channels.', ctaAction: 'platforms', image: '/socials.png' },
-  { id: 'booking', label: 'Book Appointment', desc: 'Reserve your slot instantly.', image: IMAGES[3] },
+  { id: 'booking', label: 'Book Appointment', desc: 'Reserve your slot instantly.', image: '/appointment.png' },
   { id: 'qr', label: 'Save Car via QR', desc: 'Save your favourite cars to your phone.', image: IMAGES[4] },
-  { id: 'analytics', label: 'Analytics', desc: 'Track the most viewed models & trends.', image: IMAGES[5] },
+  { id: 'analytics', label: 'Analytics', desc: 'Track the most viewed models & trends.', image: '/analytics.png' },
   { id: 'rental', label: 'Rent a Car', desc: 'Rent from our fleet right here.', image: IMAGES[0] },
   { id: 'properties', label: 'Our Properties', desc: 'Explore Rolling Automobiles properties.', image: IMAGES[1] },
-  { id: 'partners', label: 'Our Partners', desc: 'Meet the brands we collaborate with.', image: IMAGES[2] },
+  { id: 'partners', label: 'Our Partners', desc: 'Meet the brands we collaborate with.', image: '/partners.png' },
 ];
 
 function MagneticButton({ children, onClick, className }) {
