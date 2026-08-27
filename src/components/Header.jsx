@@ -4,7 +4,12 @@ export default function Header() {
   return (
     <header className="app-header">
       <div className="header-logo">
-        {/* Logo removed as requested */}
+        <img
+          src="/logo.jpeg"
+          alt="Abuja Cars"
+          style={{ width: '36px', height: '36px', borderRadius: '50%', objectFit: 'cover' }}
+        />
+        <span className="logo-text">Abuja Cars</span>
       </div>
 
       <nav className="header-nav" aria-label="Header navigation">

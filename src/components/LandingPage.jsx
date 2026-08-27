@@ -102,10 +102,13 @@ function ServiceItem({ item, index, onNavigate, scrollContainerRef }) {
     >
       <div className={`flex flex-col md:flex-row gap-8 md:gap-12 items-center ${isEven ? '' : 'md:flex-row-reverse'}`}>
         <div className={`flex-1 w-full border-white/10 py-4 ${isEven ? 'border-l-2 pl-6 md:pl-8 text-left' : 'md:border-r-2 border-l-2 md:border-l-0 pl-6 md:pl-0 md:pr-8 text-left md:text-right'}`}>
-          <div className={`inline-flex items-center justify-center w-14 h-14 rounded-full mb-5 backdrop-blur-md border border-white/10 bg-white/5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] ${isEven ? '' : 'md:ml-auto'}`}>
-            <span className="text-lg font-bold tracking-widest text-white/70 font-[Syne]">
-              {index + 1}
-            </span>
+          <div className={`inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full mb-5 overflow-hidden backdrop-blur-md border border-white/20 bg-white/5 shadow-[0_0_20px_rgba(255,255,255,0.12)] ${isEven ? '' : 'md:ml-auto'}`}>
+            <img
+              src="/logo.jpeg"
+              alt="Abuja Cars"
+              className="w-full h-full object-cover"
+              style={{ filter: 'brightness(1.08) contrast(1.05)' }}
+            />
           </div>
           <h3 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight font-[Syne] uppercase">
             {item.label}
@@ -263,7 +266,7 @@ export default function LandingPage({ onNavigate }) {
         {/* Background Video */}
         <div className="absolute inset-0 w-full h-full z-0" aria-hidden="true">
           <video
-            className={`w-full h-full object-cover transition-opacity duration-1000 ${videoLoaded ? 'opacity-50' : 'opacity-0'}`}
+            className={`w-full h-full object-cover transition-opacity duration-1000 ${videoLoaded ? 'opacity-95' : 'opacity-0'}`}
             autoPlay
             muted
             loop
@@ -273,24 +276,23 @@ export default function LandingPage({ onNavigate }) {
           >
             <source src="/bg_video.MP4" type="video/mp4" />
           </video>
-          {/* Layered overlays */}
-          <div className="absolute inset-0 bg-black/60" />
-          <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle, transparent 50%, rgba(0,0,0,0.8) 100%)' }} />
-          <div className="absolute inset-0 pointer-events-none opacity-20" style={{ backgroundImage: 'repeating-linear-gradient(transparent, transparent 2px, black 2px, black 4px)' }} />
+          {/* Subtle layered overlays (removed horizontal scanline grid) */}
+          <div className="absolute inset-0 bg-black/25" />
+          <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle, transparent 40%, rgba(0,0,0,0.7) 100%)' }} />
         </div>
 
         {/* Main Content */}
-        <div className={`relative z-10 flex flex-col items-center justify-center text-center px-4 transition-opacity duration-500 ${servicesOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+        <div className={`relative z-10 flex flex-col items-center justify-center text-center px-6 transition-opacity duration-500 ${servicesOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
 
           {/* Logo */}
           <motion.div
             initial={{ opacity: 0, y: 32, filter: 'blur(12px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            className="mb-5"
+            className="mb-8"
           >
             <div className="relative">
-              <div className="w-28 h-28 md:w-40 md:h-40 rounded-full overflow-hidden ring-1 ring-white/15 shadow-[0_0_48px_rgba(255,255,255,0.12)]">
+              <div className="w-36 h-36 sm:w-48 sm:h-48 md:w-60 md:h-60 rounded-full overflow-hidden ring-2 ring-white/20 shadow-[0_0_60px_rgba(255,255,255,0.18)]">
                 <img
                   src="/logo.jpeg"
                   alt="Rolling Automobiles"
@@ -306,7 +308,7 @@ export default function LandingPage({ onNavigate }) {
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: 1, opacity: 1 }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.75 }}
-            className="w-16 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent mb-5 origin-center"
+            className="w-24 md:w-36 h-0.5 bg-gradient-to-r from-transparent via-white/50 to-transparent mb-6 origin-center"
           />
 
           {/* Tagline */}
@@ -314,31 +316,35 @@ export default function LandingPage({ onNavigate }) {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 1.0 }}
-            className="text-[0.6rem] md:text-xs text-white/50 uppercase tracking-[0.45em] mb-12 font-[Syne] font-semibold"
+            className="text-xs sm:text-sm md:text-xl lg:text-2xl text-white/80 uppercase tracking-[0.45em] mb-14 md:mb-18 font-[Syne] font-bold drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
           >
             Africa's No 1 Automotive Dealership
           </motion.p>
 
           <div className="relative flex items-center justify-center">
-            {/* Blinking pulse ring */}
+            {/* Blinking pulse rings scaled for large button */}
             <motion.span
-              className="absolute inset-0 rounded-full border border-white/30 pointer-events-none"
-              animate={{ scale: [1, 1.18, 1], opacity: [0.5, 0, 0.5] }}
+              className="absolute inset-0 rounded-full border-2 border-white/40 pointer-events-none"
+              animate={{ scale: [1, 1.12, 1], opacity: [0.6, 0, 0.6] }}
               transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
             />
             <motion.span
-              className="absolute inset-0 rounded-full border border-white/15 pointer-events-none"
-              animate={{ scale: [1, 1.36, 1], opacity: [0.3, 0, 0.3] }}
+              className="absolute inset-0 rounded-full border border-white/20 pointer-events-none"
+              animate={{ scale: [1, 1.25, 1], opacity: [0.4, 0, 0.4] }}
               transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
             />
             <MagneticButton
-              className="w-44 h-44 md:w-52 md:h-52 rounded-full border border-white/20 bg-white/5 backdrop-blur-md text-white flex items-center justify-center font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-colors duration-500 shadow-2xl shadow-white/5"
+              className="w-72 h-72 sm:w-96 sm:h-96 md:w-[420px] md:h-[420px] rounded-full border-2 border-white/30 bg-black/50 backdrop-blur-2xl text-white flex items-center justify-center hover:bg-white hover:text-black transition-all duration-500 shadow-[0_0_80px_rgba(0,0,0,0.8)] hover:shadow-[0_0_100px_rgba(255,255,255,0.4)] p-8"
               onClick={() => setServicesOpen(true)}
             >
-              <span className="flex flex-col items-center gap-1">
-                <span className="text-base md:text-lg font-bold uppercase tracking-widest leading-none">Services</span>
-                <span className="text-[0.5rem] md:text-[0.6rem] text-white/50 uppercase tracking-[0.3em] leading-none">Tap to explore</span>
-              </span>
+              <div className="flex flex-col items-center justify-center text-center px-4 w-full">
+                <span className="text-2xl sm:text-3xl md:text-4xl font-extrabold uppercase tracking-[0.08em] leading-tight font-[Syne] whitespace-nowrap">
+                  Services
+                </span>
+                <span className="text-[0.65rem] sm:text-xs md:text-sm text-white/70 uppercase tracking-[0.25em] font-semibold mt-2.5 whitespace-nowrap">
+                  Tap to explore
+                </span>
+              </div>
             </MagneticButton>
           </div>
         </div>
