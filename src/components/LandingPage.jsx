@@ -274,7 +274,7 @@ export default function LandingPage({ onNavigate }) {
             onCanPlay={() => setVideoLoaded(true)}
             poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E"
           >
-            <source src="/bg_video.MP4" type="video/mp4" />
+            <source src="/bg_video.mp4" type="video/mp4" />
           </video>
           {/* Subtle layered overlays (removed horizontal scanline grid) */}
           <div className="absolute inset-0 bg-black/25" />
