@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const SERVER_LOGS = [
   { type: 'crit', text: '[CRIT] 2026-08-31 07:15:38 UTC [cluster-ingress-01] unix:/run/app.sock failed (111: Connection refused)' },
@@ -16,55 +16,30 @@ const SERVER_LOGS = [
 ];
 
 export default function ServerOverloadOverlay() {
-  const [isVisible, setIsVisible] = useState(false);
   const [displayedLogs, setDisplayedLogs] = useState([]);
-  const [showLogs, setShowLogs] = useState(true);
 
   useEffect(() => {
-    let showTimer;
-    let hideTimer;
-
-    const startCycle = () => {
-      // Trigger every 15 seconds
-      showTimer = setTimeout(() => {
-        setIsVisible(true);
-        setDisplayedLogs([]);
-
-        // Stream logs in real-time
-        SERVER_LOGS.forEach((log, index) => {
-          setTimeout(() => {
-            setDisplayedLogs(prev => [...prev, log]);
-          }, 100 + index * 140);
-        });
-
-        // Hide after 4 seconds and repeat cycle
-        hideTimer = setTimeout(() => {
-          setIsVisible(false);
-          startCycle();
-        }, 4000);
-      }, 15000);
-    };
-
-    startCycle();
+    // Stream terminal logs on mount
+    const timeouts = SERVER_LOGS.map((log, index) => {
+      return setTimeout(() => {
+        setDisplayedLogs(prev => [...prev, log]);
+      }, 100 + index * 120);
+    });
 
     return () => {
-      if (showTimer) clearTimeout(showTimer);
-      if (hideTimer) clearTimeout(hideTimer);
+      timeouts.forEach(t => clearTimeout(t));
     };
   }, []);
 
   return (
-    <AnimatePresence>
-      {isVisible && (
-        <motion.div
-          key="cloudflare-error-overlay"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.25 }}
-          className="fixed inset-0 z-[99999] bg-[#111114] text-[#e0e0e0] font-sans overflow-y-auto select-none"
-          style={{ backgroundColor: '#0d0d11' }}
-        >
+    <motion.div
+      key="cloudflare-error-overlay"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="fixed inset-0 z-[99999] bg-[#111114] text-[#e0e0e0] font-sans overflow-y-auto select-none"
+      style={{ backgroundColor: '#0d0d11' }}
+    >
           {/* Top subtle accent bar */}
           <div className="w-full h-1 bg-gradient-to-r from-emerald-500 via-amber-500 to-red-500" />
 
@@ -281,7 +256,5 @@ export default function ServerOverloadOverlay() {
 
           </div>
         </motion.div>
-      )}
-    </AnimatePresence>
   );
 }
