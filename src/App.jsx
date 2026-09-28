@@ -9,7 +9,6 @@ import BookingCTA from './components/BookingCTA.jsx'
 import LandingPage from './components/LandingPage.jsx'
 import PlatformsOverlay from './components/PlatformsOverlay.jsx'
 import StaffConnectOverlay from './components/StaffConnectOverlay.jsx'
-import ServerOverloadOverlay from './components/ServerOverloadOverlay.jsx'
 import { AnimatePresence } from 'framer-motion'
 
 const DEFAULT_COLOR = { hex: '#000000', name: 'Obsidian Black' }
@@ -142,7 +141,6 @@ export default function App() {
           <StaffConnectOverlay onClose={() => setShowStaff(false)} />
         )}
       </AnimatePresence>
-      <ServerOverloadOverlay />
     </>
   )
 }
